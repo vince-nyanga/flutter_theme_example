@@ -13,16 +13,20 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Theme Demo',
       theme: lightTheme,
       darkTheme: darkTheme,
-      themeMode: ThemeMode.system,
+      themeMode: ThemeMode.system, // ThemeMode.system is the default. added here as an example
       debugShowCheckedModeBanner: false,
       home: MyHomePage(title: 'Flutter Theme Demo'),
     );
   }
 
+  // light theme
   ThemeData get lightTheme => ThemeData.light().copyWith(
       primaryColor: Colors.teal[500],
-      visualDensity: VisualDensity.adaptivePlatformDensity);
+      visualDensity: VisualDensity.adaptivePlatformDensity,
+    // there are a lot of properties you can customise
+  );
 
+  // dark theme
   ThemeData get darkTheme => ThemeData.dark().copyWith(visualDensity: VisualDensity.adaptivePlatformDensity);
 }
 
@@ -43,9 +47,10 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
+      body: SafeArea(
+        minimum: EdgeInsets.all(16),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Text(
               'Select theme:',
@@ -53,6 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             ListTile(
               title: const Text('System'),
+              subtitle: const Text('Use the user system preferences'),
               leading: Radio(
                 activeColor: Colors.pinkAccent,
                 value: ThemeMode.system,
@@ -67,6 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             ListTile(
               title: const Text('Light'),
+              subtitle: const Text('Use the theme property'),
               leading: Radio(
                 activeColor: Colors.pinkAccent,
                 value: ThemeMode.light,
@@ -81,6 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             ListTile(
               title: const Text('Dark'),
+              subtitle: const Text('Use the darkTheme property'),
               leading: Radio(
                 activeColor: Colors.pinkAccent,
                 value: ThemeMode.dark,
